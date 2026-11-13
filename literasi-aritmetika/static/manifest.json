@@ -1,0 +1,12 @@
+{
+  "name": "ARITMA - Barisan & Deret Aritmetika",
+  "short_name": "ARITMA",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f7fb",
+  "theme_color": "#2563eb",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

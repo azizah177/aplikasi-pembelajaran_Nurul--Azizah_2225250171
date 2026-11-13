@@ -1,0 +1,1173 @@
+<title>aplikasi-pembelajaran-Nurul Azizah-2225250171</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: satu kolom ala aplikasi HP (maks 720px), langit malam 3D di belakang, kartu-kartu terang di depan */
+:root{
+  color-scheme: dark;
+  --bg:#14123b; --bg2:#1d1a55; --card:#24206a; --card2:#2d2880; --line:#433ea0;
+  --fg:#f5f3ff; --muted:#bdb7ee; --sun:#ffd166; --coral:#ff6f91; --teal:#3ee0c5; --sky:#7cc4ff;
+  --rumus:#ff8a9c; --kerja:#8fd3ff; --ok:#46e39a; --no:#ff7676; --mark:#ffd166; --markfg:#2a1d00;
+  --display:'Baloo 2', 'Trebuchet MS', system-ui, sans-serif;
+  --body:'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  background: radial-gradient(1200px 600px at 80% -10%, #3b2f8f 0%, transparent 60%),
+              radial-gradient(900px 500px at -10% 30%, #1f4a8a 0%, transparent 55%), var(--bg);
+  background-attachment: fixed;
+  color:var(--fg); font-family:var(--body); font-size:16px; line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:0 32px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+/* ---------- Intro ---------- */
+#intro{position:fixed;inset:0;z-index:50;display:grid;place-items:center;overflow:hidden;
+  background: radial-gradient(circle at 50% 40%, #2c2380 0%, #14123b 70%);
+  padding:max(24px, env(safe-area-inset-top,0px)) max(16px, env(safe-area-inset-right,0px)) max(24px, env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px));
+  transition:opacity .7s ease, transform .7s ease}
+#intro.keluar{opacity:0;transform:scale(1.08);pointer-events:none}
+#intro3d{position:absolute;inset:0}
+.intro-isi{position:relative;text-align:center;max-width:640px;display:grid;gap:14px;justify-items:center}
+.intro-kecil{font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-size:.8rem;
+  background:rgba(20,18,59,.6);padding:6px 14px;border-radius:99px}
+.intro-judul{font-size:clamp(2.3rem, 9vw, 4.6rem);font-weight:800;line-height:1.02;
+  text-shadow:0 6px 0 rgba(0,0,0,.25), 0 0 40px rgba(255,111,145,.35)}
+.intro-judul .huruf{display:inline-block;animation:loncat 2.4s ease-in-out infinite}
+.intro-judul .zizah{color:var(--sun)}
+.intro-judul .belajar{color:var(--coral)}
+@keyframes loncat{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-14px)}}
+.intro-sub{color:var(--muted);font-size:1.05rem;max-width:30ch;background:rgba(20,18,59,.55);padding:4px 12px;border-radius:12px}
+.btn-mulai{margin-top:8px;font-family:var(--display);font-size:1.35rem;font-weight:800;border:0;cursor:pointer;
+  padding:14px 34px;border-radius:99px;color:#2a1600;background:linear-gradient(180deg,#ffe08a,#ffb648);
+  box-shadow:0 6px 0 #c47a12, 0 14px 30px rgba(255,182,72,.35);transition:transform .15s}
+.btn-mulai:hover{transform:translateY(-2px)}
+.btn-mulai:active{transform:translateY(4px);box-shadow:0 2px 0 #c47a12}
+.link-sunyi{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:.9rem}
+
+/* ---------- Topbar ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;max-width:720px;margin:0 auto;
+  display:flex;align-items:center;gap:10px;padding:12px 0;
+  background:linear-gradient(var(--bg) 70%, transparent)}
+.topbar h1{font-size:1.35rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:var(--card);cursor:pointer;
+  display:grid;place-items:center;font-size:1.15rem;flex:none}
+.icon-btn.nyala{background:var(--sun);color:#2a1600;border-color:var(--sun);animation:denyut 1.8s ease-in-out infinite}
+@keyframes denyut{50%{box-shadow:0 0 0 6px rgba(255,209,102,.18)}}
+.badge{background:var(--teal);color:#06302a;font-weight:800;border-radius:99px;padding:4px 12px;font-size:.85rem}
+
+main{max-width:720px;margin:0 auto}
+.view{display:grid;gap:14px;animation:muncul .45s ease both}
+@keyframes muncul{from{opacity:.001;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0;
+  box-shadow:0 10px 30px rgba(5,3,30,.35)}
+.card h2{font-size:1.6rem;margin-bottom:6px}
+.card h3{font-size:1.15rem;margin-bottom:8px}
+
+.btn{border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:11px 16px;font-weight:700;cursor:pointer;transition:transform .12s, background .2s}
+.btn:hover{background:#38329a}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{background:linear-gradient(180deg,#ff8aa6,#ff5d84);border-color:#ff5d84;color:#fff;box-shadow:0 4px 0 #b8355a}
+.btn.full{width:100%}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row > .btn{flex:1 1 140px}
+
+label{display:grid;gap:6px;font-weight:700;color:var(--muted)}
+input{font:inherit;color:var(--fg);background:#17144a;border:2px solid var(--line);border-radius:12px;padding:11px 12px;width:100%}
+input:focus{border-color:var(--sun);outline:none}
+
+/* ---------- Login ---------- */
+.hero{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 30%, #3a2f9a, #1b1752)}
+.hero3d{height:240px}
+.hero-teks{padding:0 18px 18px;display:grid;gap:4px}
+.hero-teks h2{font-size:1.7rem}
+.hero-teks p{margin:0;color:var(--muted)}
+#formLogin{display:grid;gap:12px}
+.err{color:var(--no);margin:0;min-height:1.2em;font-weight:700}
+
+/* ---------- Home ---------- */
+.zizah{display:flex;gap:14px;align-items:center}
+.avatar{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(from 200deg,var(--coral),var(--sun),var(--teal),var(--coral));padding:3px}
+.avatar span{width:100%;height:100%;border-radius:50%;background:var(--bg2);display:grid;place-items:center;
+  font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--sun)}
+.gelembung{position:relative;background:#fff;color:#241f5c;border-radius:16px;padding:10px 14px;font-weight:700;min-width:0}
+.gelembung::before{content:"";position:absolute;left:-8px;top:22px;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.gelembung small{display:block;font-weight:600;color:#5a548f}
+
+.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.menu-item{position:relative;text-align:left;border:1px solid var(--line);border-radius:20px;padding:16px;cursor:pointer;
+  display:grid;gap:2px;background:linear-gradient(160deg,var(--c1),var(--c2));color:#fff;min-height:118px;
+  box-shadow:0 6px 0 rgba(0,0,0,.25);transition:transform .18s}
+.menu-item:hover{transform:translateY(-3px) rotate(-.6deg)}
+.menu-item:active{transform:translateY(2px)}
+.menu-item .em{font-size:1.9rem;line-height:1}
+.menu-item b{font-family:var(--display);font-size:1.2rem}
+.menu-item small{opacity:.9;font-weight:600}
+.menu-item.wide{grid-column:1/-1;min-height:96px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+
+/* ---------- Warna konvensi ---------- */
+.c-text{color:var(--fg)}
+.c-rumus{color:var(--rumus);font-weight:800}
+.c-kerja{color:var(--kerja);font-weight:700}
+.rumus-box{font-family:var(--display);font-size:1.25rem;color:var(--rumus);background:rgba(255,111,145,.1);
+  border:2px dashed rgba(255,138,156,.55);border-radius:14px;padding:10px 14px;margin:10px 0;overflow-x:auto}
+mark{background:var(--mark);color:var(--markfg);border-radius:5px;padding:0 3px}
+
+/* ---------- Materi ---------- */
+.progress-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.progress-dots i{width:12px;height:12px;border-radius:50%;background:var(--line)}
+.progress-dots i.on{background:var(--sun);transform:scale(1.25)}
+.progress-dots i.ok{background:var(--ok)}
+.progress-dots i.no{background:var(--no)}
+.materi .ikon{font-size:2.6rem;width:72px;height:72px;display:grid;place-items:center;border-radius:20px;background:rgba(255,255,255,.08);margin-bottom:8px;
+  animation:putar 6s ease-in-out infinite}
+@keyframes putar{50%{transform:rotate(8deg) translateY(-4px)}}
+.contoh{background:rgba(0,0,0,.18);border-radius:14px;padding:14px;display:grid;gap:8px}
+.steps{margin:0;padding-left:1.4em;display:grid;gap:6px;color:var(--kerja);font-weight:700}
+.steps li{animation:muncul .35s ease both}
+.ingat{background:rgba(255,209,102,.12);border:1px solid rgba(255,209,102,.35);border-radius:14px;padding:10px 14px;margin-top:10px}
+
+/* ---------- Lab ---------- */
+.canvas3d{height:min(56vh,420px);border-radius:22px;overflow:hidden;border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 20%, #2f2a85, #15124a)}
+.sliders{display:grid;gap:10px}
+input[type=range]{padding:0;border:0;background:none;accent-color:var(--coral);height:28px}
+.info{color:var(--muted)}
+.btn.aktif{background:var(--teal);color:#06302a;border-color:var(--teal)}
+
+/* ---------- Kalkulator ---------- */
+#formHitung{display:grid;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+
+/* ---------- Latihan & tes ---------- */
+.level{display:inline-block;font-weight:800;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px;background:var(--sky);color:#08284a}
+.level.Sedang{background:var(--sun);color:#2a1d00}
+.level.Sulit{background:var(--coral);color:#fff}
+.level.Variasi{background:var(--teal);color:#06302a}
+.soal{font-size:1.08rem}
+details{background:rgba(0,0,0,.15);border-radius:12px;padding:8px 12px}
+summary{cursor:pointer;font-weight:700;color:var(--sun)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--line);background:#1a1750;border-radius:99px;padding:8px 14px;font-weight:700;cursor:pointer}
+.chip.ok{border-color:var(--ok);background:rgba(70,227,154,.18)}
+.chip.no{border-color:var(--no);background:rgba(255,118,118,.15);animation:goyang .35s}
+@keyframes goyang{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.feedback{border-radius:12px;padding:10px 14px;font-weight:700;margin-top:8px}
+.feedback.ok{background:rgba(70,227,154,.16);color:var(--ok)}
+.feedback.no{background:rgba(255,118,118,.14);color:var(--no)}
+.feedback.tip{background:rgba(255,209,102,.14);color:var(--sun)}
+.jawab-row{display:flex;gap:10px}
+.jawab-row input{flex:1;min-width:0}
+.jawab-row .btn{flex:none}
+.skor-besar{font-family:var(--display);font-size:4rem;font-weight:800;text-align:center;color:var(--sun);line-height:1.1;
+  text-shadow:0 0 30px rgba(255,209,102,.4)}
+.indikator{color:var(--teal);font-weight:800;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase}
+.tahap{border-top:1px dashed var(--line);padding-top:12px;margin-top:12px;display:grid;gap:8px}
+.opsi{text-align:left}
+.opsi.primary{box-shadow:none}
+.bar{height:10px;border-radius:99px;background:#17144a;overflow:hidden}
+.bar div{height:100%;background:linear-gradient(90deg,var(--teal),var(--sun));border-radius:99px}
+
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+.tbl th{color:var(--muted);font-size:.85rem}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;
+  background:#fff;color:#241f5c;font-weight:800;padding:10px 18px;border-radius:99px;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:calc(100% - 32px)}
+.modal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(8,6,30,.7);padding:16px}
+.modal .card{max-width:380px;display:grid;gap:14px}
+.konfeti{position:fixed;top:-20px;z-index:65;width:10px;height:14px;border-radius:2px;pointer-events:none;animation:jatuh 2.6s linear forwards}
+@keyframes jatuh{to{transform:translateY(110vh) rotate(720deg)}}
+
+footer{max-width:720px;margin:24px auto 0;text-align:center;color:var(--muted);font-size:.85rem}
+
+@media (max-width:420px){ .menu-item{min-height:104px;padding:14px} .card{padding:15px} }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<!-- ================= INTRO ================= -->
+<div id="intro">
+  <div id="intro3d"></div>
+  <div class="intro-isi">
+    <span class="intro-kecil">Barisan &amp; Deret Aritmetika</span>
+    <h1 class="intro-judul" id="introJudul" aria-label="Ayo belajar dengan Kak Zizah!">Ayo belajar dengan Kak Zizah!</h1>
+    <p class="intro-sub">Belajar pola bilangan sambil mendengarkan musik dan melihat bangun 3D.</p>
+    <button class="btn-mulai" id="btnMulai">▶ Mulai Belajar</button>
+    <button class="link-sunyi" id="btnMulaiSunyi">Mulai tanpa musik</button>
+  </div>
+</div>
+
+<header class="topbar">
+  <button id="btnBack" class="icon-btn hidden" aria-label="Kembali ke beranda">←</button>
+  <h1 id="judul">ARITMA</h1>
+  <span id="userBadge" class="badge hidden"></span>
+  <button id="btnMusik" class="icon-btn" aria-label="Nyalakan atau matikan musik" title="Musik">♪</button>
+</header>
+
+<main id="app">
+  <!-- LOGIN -->
+  <section id="v-login" class="view hidden">
+    <div class="hero">
+      <div id="hero3d" class="hero3d"></div>
+      <div class="hero-teks">
+        <h2>Halo! Aku Kak Zizah 👋</h2>
+        <p>Masukkan kode siswamu dulu, lalu kita belajar barisan dan deret aritmetika bersama.</p>
+      </div>
+    </div>
+    <form id="formLogin" class="card">
+      <label for="inKode">Kode siswa <input id="inKode" placeholder="contoh: S01" required maxlength="20" autocomplete="off"></label>
+      <label for="inNama">Nama panggilan (opsional) <input id="inNama" maxlength="60"></label>
+      <label for="inKelas">Kelas (opsional) <input id="inKelas" placeholder="VIII" maxlength="10"></label>
+      <button class="btn primary" type="submit">Masuk</button>
+      <p id="loginErr" class="err"></p>
+    </form>
+  </section>
+
+  <!-- HOME -->
+  <section id="v-home" class="view hidden">
+    <div class="zizah">
+      <div class="avatar"><span>KZ</span></div>
+      <div class="gelembung" id="hello"></div>
+    </div>
+    <div class="menu">
+      <button class="menu-item" data-go="materi" style="--c1:#5b6cff;--c2:#3a3fc4"><span class="em">📘</span><b>Materi</b><small>5 kartu singkat</small></button>
+      <button class="menu-item" data-go="lab" style="--c1:#1fc7b0;--c2:#13867a"><span class="em">🧊</span><b>Lab 3D</b><small>Lihat pola bergerak</small></button>
+      <button class="menu-item" data-go="kalkulator" style="--c1:#ff9a5a;--c2:#d9612a"><span class="em">🧮</span><b>Kalkulator</b><small>Hitung + langkah</small></button>
+      <button class="menu-item" data-go="latihan" style="--c1:#ff6f91;--c2:#c23b63"><span class="em">✏️</span><b>Latihan</b><small>Mudah → sulit</small></button>
+      <button class="menu-item wide" data-go="literasi" style="--c1:#ffc94d;--c2:#e08a12"><span class="em">🏆</span><b>Tes Literasi Matematika</b><small>4 soal cerita · skor per tahap · maks 24</small></button>
+      <button class="menu-item" data-go="progres" style="--c1:#8b6cff;--c2:#5a3fc4"><span class="em">📈</span><b>Progres</b><small>Riwayat skor</small></button>
+      <button class="menu-item" data-go="rekap" style="--c1:#2fb6e8;--c2:#1a6fa3"><span class="em">📋</span><b>Rekap Nilai</b><small>Semua siswa (guru/dosen)</small></button>
+      <button class="menu-item" id="btnLogout" style="--c1:#4a4f7a;--c2:#2e3157"><span class="em">🚪</span><b>Keluar</b><small>Ganti kode</small></button>
+    </div>
+    <div class="legend card">
+      <b>Kode warna:</b>
+      <span class="c-text">putih = penjelasan</span>
+      <span class="c-rumus">merah = rumus</span>
+      <span class="c-kerja">biru = pengerjaan</span>
+    </div>
+  </section>
+
+  <!-- MATERI -->
+  <section id="v-materi" class="view hidden">
+    <div class="progress-dots" id="materiDots"></div>
+    <article id="materiCard" class="card materi"></article>
+    <div class="row">
+      <button class="btn" id="mPrev">‹ Sebelumnya</button>
+      <button class="btn primary" id="mNext">Berikutnya ›</button>
+    </div>
+  </section>
+
+  <!-- LAB 3D -->
+  <section id="v-lab" class="view hidden">
+    <div id="lab3d" class="canvas3d"></div>
+    <div class="card">
+      <div class="sliders">
+        <label for="sA">a (suku pertama): <b id="vA">2</b><input type="range" id="sA" min="1" max="10" value="2"></label>
+        <label for="sB">b (beda): <b id="vB">2</b><input type="range" id="sB" min="-2" max="5" value="2"></label>
+        <label for="sN">n (banyak suku): <b id="vN">6</b><input type="range" id="sN" min="1" max="12" value="6"></label>
+      </div>
+      <p></p>
+      <div class="row">
+        <button class="btn" id="modeUn">Tampilkan Uₙ</button>
+        <button class="btn" id="modeSn">Tampilkan Sₙ</button>
+      </div>
+      <p id="labInfo" class="info"></p>
+      <p class="info"><small>Geser layar 3D untuk memutar, cubit atau scroll untuk zoom.</small></p>
+    </div>
+  </section>
+
+  <!-- KALKULATOR -->
+  <section id="v-kalkulator" class="view hidden">
+    <form id="formHitung" class="card">
+      <div class="grid3">
+        <label for="kA">a <input id="kA" inputmode="decimal" value="5"></label>
+        <label for="kB">b <input id="kB" inputmode="decimal" value="3"></label>
+        <label for="kN">n <input id="kN" inputmode="numeric" value="10"></label>
+      </div>
+      <button class="btn primary" type="submit">Hitung</button>
+    </form>
+    <div id="hasilHitung" style="display:grid;gap:14px"></div>
+  </section>
+
+  <!-- LATIHAN -->
+  <section id="v-latihan" class="view hidden">
+    <div class="progress-dots" id="latDots"></div>
+    <article id="latCard" class="card"></article>
+  </section>
+
+  <!-- LITERASI -->
+  <section id="v-literasi" class="view hidden">
+    <div class="progress-dots" id="litDots"></div>
+    <article id="litCard" class="card"></article>
+  </section>
+
+  <!-- PROGRES -->
+  <section id="v-progres" class="view hidden">
+    <div id="progresList"></div>
+  </section>
+
+  <!-- REKAP (guru/dosen) -->
+  <section id="v-rekap" class="view hidden">
+    <div id="rekapList"></div>
+  </section>
+</main>
+
+<footer>Aplikasi Pembelajaran · Nurul Azizah · 2225250171</footer>
+
+<div id="toast" class="toast hidden"></div>
+<div id="modal" class="modal hidden"><div class="card"><p id="modalTeks" style="margin:0;font-weight:700"></p>
+  <div class="row"><button class="btn" id="modalTidak">Batal</button><button class="btn primary" id="modalYa">Ya, kumpulkan</button></div></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+"use strict";
+/* =====================================================================
+   KONTEN (dipindahkan dari content.py)
+   ===================================================================== */
+const MATERI = [
+  { id:1, judul:"Pola & Beda", ikon:"🔢",
+    penjelasan:"Barisan aritmetika adalah urutan bilangan yang selalu bertambah (atau berkurang) dengan angka yang SAMA. Angka itu disebut beda (b).",
+    rumus:"b = U₂ − U₁",
+    contoh:{ soal:"Barisan: 12, 14, 16, 18, … Berapa bedanya?",
+      langkah:["Ambil dua suku berurutan: 14 dan 12.","b = 14 − 12 = 2","Cek: 16 − 14 = 2 ✔. Jadi beda = 2."] },
+    ingat:"Beda bisa negatif. Contoh 20, 17, 14 → b = −3." },
+  { id:2, judul:"Suku ke-n (Uₙ)", ikon:"🎯",
+    penjelasan:"Uₙ adalah SATU bilangan pada urutan ke-n. Pakai Uₙ jika yang ditanya \"suku ke-…\", \"hari ke-…\", \"baris ke-…\".",
+    rumus:"Uₙ = a + (n − 1) × b",
+    contoh:{ soal:"Barisan 5, 8, 11, … Tentukan suku ke-10.",
+      langkah:["Diketahui: a = 5, b = 8 − 5 = 3, n = 10.","Ditanya: U₁₀ (satu suku) → pakai rumus Uₙ.","U₁₀ = 5 + (10 − 1) × 3","U₁₀ = 5 + 27 = 32"] },
+    ingat:"a = suku pertama, b = beda, n = urutan suku." },
+  { id:3, judul:"Jumlah n Suku (Sₙ)", ikon:"➕",
+    penjelasan:"Deret aritmetika adalah PENJUMLAHAN suku-suku barisan. Pakai Sₙ jika yang ditanya \"jumlah\", \"total\", \"seluruhnya\".",
+    rumus:"Sₙ = n/2 × (2a + (n − 1) × b)   atau   Sₙ = n/2 × (a + Uₙ)",
+    contoh:{ soal:"Hitung jumlah 10 suku pertama dari 5, 8, 11, …",
+      langkah:["Diketahui: a = 5, b = 3, n = 10.","Ditanya: jumlah (total) → pakai rumus Sₙ.","S₁₀ = 10/2 × (2×5 + 9×3)","S₁₀ = 5 × (10 + 27) = 5 × 37 = 185"] },
+    ingat:"Sₙ selalu lebih besar dari Uₙ (jika suku-sukunya positif), karena Sₙ adalah total." },
+  { id:4, judul:"Uₙ atau Sₙ?", ikon:"🤔",
+    penjelasan:"Jangan tertukar! Baca kata kunci pada pertanyaan sebelum memilih rumus.",
+    rumus:"\"ke-…\" → Uₙ     |     \"jumlah / total\" → Sₙ",
+    contoh:{ soal:"Ani menabung Rp2.000 pada hari pertama, lalu naik Rp1.000 tiap hari. (a) Berapa tabungan pada hari ke-7? (b) Berapa total tabungan 7 hari?",
+      langkah:["(a) \"hari ke-7\" → satu nilai → Uₙ.","U₇ = 2.000 + 6 × 1.000 = 8.000","(b) \"total 7 hari\" → dijumlahkan → Sₙ.","S₇ = 7/2 × (2.000 + 8.000) = 3,5 × 10.000 = 35.000"] },
+    ingat:"Uₙ = satu kotak. Sₙ = semua kotak digabung." },
+  { id:5, judul:"Strategi Soal Cerita", ikon:"📖",
+    penjelasan:"Soal panjang? Pakai 5 langkah DITA-RS: Diketahui, Ditanya, pilih Rumus, hitung (Selesaikan), lalu Simpulkan.",
+    rumus:"Diketahui → Ditanya → Rumus → Hitung → Simpulkan",
+    contoh:{ soal:"Gedung pertunjukan: baris pertama 15 kursi, tiap baris berikutnya bertambah 2 kursi. Ada 12 baris. Berapa kursi seluruhnya?",
+      langkah:["Diketahui: a = 15, b = 2, n = 12.","Ditanya: kursi SELURUHNYA → total.","Rumus: Sₙ = n/2 × (2a + (n − 1)b).","S₁₂ = 6 × (30 + 22) = 6 × 52 = 312","Simpulkan: jumlah kursi seluruhnya 312 kursi."] },
+    ingat:"Garis bawahi angka & kata tanya. Abaikan informasi yang tidak dipakai." },
+];
+
+const LATIHAN_DASAR = [
+  {id:1, level:"Mudah", soal:"Tentukan beda barisan 7, 11, 15, 19, …", diketahui:["U₁ = 7","U₂ = 11"], ditanya:"beda (b)", rumus:"b", jawaban:4, satuan:"", langkah:["b = U₂ − U₁","b = 11 − 7 = 4"]},
+  {id:2, level:"Mudah", soal:"Tentukan suku ke-8 dari barisan 3, 5, 7, …", diketahui:["a = 3","b = 2","n = 8"], ditanya:"suku ke-8", rumus:"Un", jawaban:17, satuan:"", langkah:["U₈ = a + (n − 1)b","U₈ = 3 + 7 × 2","U₈ = 3 + 14 = 17"]},
+  {id:3, level:"Mudah", soal:"Hitung jumlah 6 suku pertama dari 2, 4, 6, …", diketahui:["a = 2","b = 2","n = 6"], ditanya:"jumlah 6 suku", rumus:"Sn", jawaban:42, satuan:"", langkah:["S₆ = n/2 × (2a + (n − 1)b)","S₆ = 3 × (4 + 10)","S₆ = 3 × 14 = 42"]},
+  {id:4, level:"Sedang", soal:"Dina menabung Rp5.000 pada minggu pertama. Setiap minggu tabungannya naik Rp2.000. Berapa uang yang ditabung Dina pada minggu ke-10?", diketahui:["a = 5.000","b = 2.000","n = 10"], ditanya:"tabungan minggu ke-10", rumus:"Un", jawaban:23000, satuan:"rupiah", langkah:["Kata kunci \"minggu ke-10\" → Uₙ","U₁₀ = 5.000 + 9 × 2.000","U₁₀ = 5.000 + 18.000 = 23.000"]},
+  {id:5, level:"Sedang", soal:"Sebuah aula memiliki 10 baris kursi. Baris pertama ada 12 kursi dan setiap baris berikutnya bertambah 3 kursi. Berapa jumlah kursi di aula itu?", diketahui:["a = 12","b = 3","n = 10"], ditanya:"jumlah seluruh kursi", rumus:"Sn", jawaban:255, satuan:"kursi", langkah:["Kata kunci \"jumlah kursi\" → Sₙ","S₁₀ = 5 × (2×12 + 9×3)","S₁₀ = 5 × (24 + 27) = 5 × 51 = 255"]},
+  {id:6, level:"Sedang", soal:"Tumpukan kaleng di toko: lapisan paling atas 4 kaleng, lapisan di bawahnya selalu 2 kaleng lebih banyak. Berapa kaleng pada lapisan ke-9 dari atas?", diketahui:["a = 4","b = 2","n = 9"], ditanya:"kaleng lapisan ke-9", rumus:"Un", jawaban:20, satuan:"kaleng", langkah:["\"lapisan ke-9\" → Uₙ","U₉ = 4 + 8 × 2 = 20"]},
+  {id:7, level:"Sulit", soal:"Pak Budi memproduksi kerupuk. Hari pertama 40 bungkus, hari ke-2 45 bungkus, hari ke-3 50 bungkus, dan seterusnya. Berapa total bungkus selama 14 hari?", diketahui:["a = 40","b = 5","n = 14"], ditanya:"total 14 hari", rumus:"Sn", jawaban:1015, satuan:"bungkus", langkah:["b = 45 − 40 = 5","\"total\" → Sₙ","S₁₄ = 7 × (2×40 + 13×5)","S₁₄ = 7 × (80 + 65) = 7 × 145 = 1.015"]},
+  {id:8, level:"Sulit", soal:"Suku ke-3 suatu barisan aritmetika adalah 14 dan suku ke-7 adalah 30. Tentukan suku ke-20.", diketahui:["U₃ = 14 → a + 2b = 14","U₇ = 30 → a + 6b = 30"], ditanya:"suku ke-20", rumus:"Un", jawaban:82, satuan:"", langkah:["Kurangkan: (a + 6b) − (a + 2b) = 30 − 14","4b = 16 → b = 4","a + 2×4 = 14 → a = 6","U₂₀ = 6 + 19 × 4 = 6 + 76 = 82"]},
+];
+
+const LITERASI = [
+  { id:1, indikator:"Mathematical Reasoning", judul:"Memilih Rencana Menabung",
+    soal:"Rina ingin menabung selama 10 minggu. Rencana A: minggu pertama Rp10.000, lalu setiap minggu naik Rp2.000. Rencana B: setiap minggu tetap Rp15.000. Rina ingin total tabungannya sebanyak mungkin. Rencana mana yang sebaiknya dipilih Rina? Jelaskan alasan matematismu.",
+    penting:["10 minggu","Rp10.000","naik Rp2.000","tetap Rp15.000","total tabungan"],
+    tahap:[
+      {teks:"Tahap 1 — Yang harus dibandingkan adalah …", tipe:"pilihan", opsi:["Tabungan minggu ke-10 saja","TOTAL tabungan 10 minggu tiap rencana","Tabungan minggu pertama"], kunci:1, skor:1},
+      {teks:"Tahap 2a — Total tabungan Rencana A (S₁₀) = Rp …", tipe:"angka", kunci:190000, skor:1},
+      {teks:"Tahap 2b — Total tabungan Rencana B = Rp …", tipe:"angka", kunci:150000, skor:1},
+      {teks:"Tahap 3 — Selisih total A dan B = Rp …", tipe:"angka", kunci:40000, skor:1},
+      {teks:"Tahap 4 — Keputusan: Rina sebaiknya memilih …", tipe:"pilihan", opsi:["Rencana A","Rencana B","Sama saja"], kunci:0, skor:1},
+      {teks:"Tahap 5 — Alasan yang tepat:", tipe:"pilihan", opsi:["Karena minggu pertama A lebih kecil","Karena total A lebih besar Rp40.000 walaupun awalnya lebih kecil","Karena B nilainya tetap sehingga lebih mudah"], kunci:1, skor:1},
+    ],
+    pembahasan:["Yang dibandingkan adalah TOTAL 10 minggu, bukan satu minggu.","A: S₁₀ = 10/2 × (2×10.000 + 9×2.000) = 5 × 38.000 = Rp190.000","B: 10 × 15.000 = Rp150.000","Selisih: 190.000 − 150.000 = Rp40.000","Pilih Rencana A, karena totalnya lebih besar walaupun minggu awalnya lebih kecil."] },
+  { id:2, indikator:"Formulating Situations Mathematically", judul:"Kursi Gedung Pertunjukan",
+    soal:"Sebuah gedung pertunjukan memiliki 15 baris kursi. Baris pertama berisi 20 kursi dan setiap baris berikutnya bertambah 4 kursi. Gedung dicat ulang tahun 2020. Panitia sudah menjual 700 tiket. Apakah kursi di gedung cukup untuk semua penonton? Ubah situasi ini menjadi model matematika, lalu selesaikan.",
+    penting:["15 baris","20 kursi","bertambah 4 kursi","700 tiket"],
+    tahap:[
+      {teks:"Tahap 1 — Suku pertama (a) = …", tipe:"angka", kunci:20, skor:1},
+      {teks:"Tahap 2 — Beda (b) = …", tipe:"angka", kunci:4, skor:1},
+      {teks:"Tahap 3 — Banyak suku (n) = …", tipe:"angka", kunci:15, skor:1},
+      {teks:"Tahap 4 — Model matematika yang tepat:", tipe:"pilihan", opsi:["U₁₅ = 20 + 14 × 4","S₁₅ = 15/2 × (2×20 + 14×4)","700 ÷ 15"], kunci:1, skor:1},
+      {teks:"Tahap 5 — Jumlah seluruh kursi = …", tipe:"angka", kunci:720, skor:1},
+      {teks:"Tahap 6 — Kesimpulan:", tipe:"pilihan", opsi:["Tidak cukup, kurang 20 kursi","Cukup, masih sisa 20 kursi","Cukup, sisa 76 kursi"], kunci:1, skor:1},
+    ],
+    pembahasan:["Informasi \"dicat tahun 2020\" tidak dipakai (informasi pengecoh).","a = 20, b = 4, n = 15. Ditanya total kursi → Sₙ.","S₁₅ = 15/2 × (40 + 56) = 15/2 × 96 = 720 kursi","720 ≥ 700 → cukup, sisa 720 − 700 = 20 kursi."] },
+  { id:3, indikator:"Employing Mathematical Concepts, Facts, and Procedures", judul:"Produksi Kue",
+    soal:"Bu Sari membuat kue untuk dijual. Hari pertama ia membuat 30 kue, hari kedua 35 kue, hari ketiga 40 kue, dan seterusnya. Keuntungan setiap kue Rp1.500. Berapa kue yang dibuat pada hari ke-12, berapa total kue selama 12 hari, dan berapa total keuntungannya? Tunjukkan langkah perhitunganmu.",
+    penting:["30 kue","35 kue","hari ke-12","total kue selama 12 hari","Rp1.500"],
+    tahap:[
+      {teks:"Tahap 1 — Beda (b) = …", tipe:"angka", kunci:5, skor:1},
+      {teks:"Tahap 2 — Kue hari ke-12 (U₁₂) = …", tipe:"angka", kunci:85, skor:2},
+      {teks:"Tahap 3 — Total kue 12 hari (S₁₂) = …", tipe:"angka", kunci:690, skor:2},
+      {teks:"Tahap 4 — Total keuntungan = Rp …", tipe:"angka", kunci:1035000, skor:1},
+    ],
+    pembahasan:["b = 35 − 30 = 5","U₁₂ = 30 + 11 × 5 = 85 kue","S₁₂ = 12/2 × (30 + 85) = 6 × 115 = 690 kue","Keuntungan = 690 × 1.500 = Rp1.035.000"] },
+  { id:4, indikator:"Interpreting, Applying, and Evaluating Mathematical Outcomes", judul:"Menabung untuk Sepeda",
+    soal:"Doni menabung Rp50.000 pada bulan pertama, lalu setiap bulan tabungannya naik Rp25.000. Ia ingin membeli sepeda seharga Rp1.500.000. Temannya menghitung: 50.000 + (n − 1) × 25.000 = 1.500.000, sehingga n = 59. Temannya menyimpulkan Doni harus menabung 59 bulan. Apakah kamu setuju? Tentukan berapa bulan sebenarnya Doni harus menabung dan jelaskan alasanmu.",
+    penting:["Rp50.000","naik Rp25.000","Rp1.500.000","n = 59"],
+    tahap:[
+      {teks:"Tahap 1 — Pendapatmu tentang cara teman Doni:", tipe:"pilihan", opsi:["Setuju, rumusnya sudah benar","Tidak setuju, harga sepeda dibandingkan dengan TOTAL tabungan (Sₙ), bukan Uₙ","Tidak setuju, seharusnya dibagi 25.000"], kunci:1, skor:1},
+      {teks:"Tahap 2 — Total tabungan 9 bulan (S₉) = Rp …", tipe:"angka", kunci:1350000, skor:1},
+      {teks:"Tahap 3 — Kekurangan uang setelah 9 bulan = Rp …", tipe:"angka", kunci:150000, skor:1},
+      {teks:"Tahap 4 — Total tabungan 10 bulan (S₁₀) = Rp …", tipe:"angka", kunci:1625000, skor:1},
+      {teks:"Tahap 5 — Doni minimal menabung … bulan", tipe:"angka", kunci:10, skor:1},
+      {teks:"Tahap 6 — Sisa uang setelah membeli sepeda = Rp …", tipe:"angka", kunci:125000, skor:1},
+    ],
+    pembahasan:["Teman Doni keliru: ia memakai Uₙ (tabungan satu bulan), padahal uang sepeda berasal dari TOTAL tabungan → Sₙ.","S₉ = 9/2 × (100.000 + 8×25.000) = 4,5 × 300.000 = Rp1.350.000 (belum cukup)","Kurang 1.500.000 − 1.350.000 = Rp150.000","S₁₀ = 5 × (100.000 + 9×25.000) = 5 × 325.000 = Rp1.625.000 (cukup)","Jadi cukup 10 bulan, sisa 1.625.000 − 1.500.000 = Rp125.000. Hasil 59 bulan tidak wajar."] },
+];
+
+const KONTEKS_ACAK = [
+  ["Siti menabung Rp{a} pada hari pertama, lalu setiap hari bertambah Rp{b}.","Berapa uang yang ditabung pada hari ke-{n}?","Berapa total tabungan selama {n} hari?","rupiah",1000],
+  ["Baris pertama sebuah stadion mini berisi {a} kursi, dan setiap baris berikutnya bertambah {b} kursi.","Berapa kursi pada baris ke-{n}?","Berapa jumlah kursi pada {n} baris pertama?","kursi",1],
+  ["Andi berlatih push-up. Hari pertama {a} kali, setiap hari bertambah {b} kali.","Berapa push-up pada hari ke-{n}?","Berapa total push-up selama {n} hari?","kali",1],
+  ["Sebuah pabrik memproduksi {a} botol pada minggu pertama dan naik {b} botol setiap minggu.","Berapa produksi pada minggu ke-{n}?","Berapa total produksi selama {n} minggu?","botol",1],
+];
+
+/* =====================================================================
+   UTIL
+   ===================================================================== */
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const rp = (x) => Number(x).toLocaleString("id-ID", {maximumFractionDigits:2});
+const acak = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pilih = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const simpan = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const muat = (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
+const hapus = (k) => { try { localStorage.removeItem(k); } catch (e) {} };
+
+function parseAngka(s) {
+  if (s == null) return null;
+  s = String(s).toLowerCase().replace(/rp/g, "").replace(/\s/g, "");
+  if (!s) return null;
+  if (s.includes(".") && s.includes(",")) s = s.replace(/\./g, "").replace(",", ".");
+  else if (s.includes(",")) s = s.replace(",", ".");
+  else if ((s.match(/\./g) || []).length > 1 || /^-?\d{1,3}\.\d{3}$/.test(s)) s = s.replace(/\./g, "");
+  const v = Number(s);
+  return Number.isFinite(v) ? v : null;
+}
+const tandaiAngka = (t) => esc(t).replace(/(Rp)?\d[\d.,]*/g, (m) => `<mark>${m}</mark>`);
+function tandaiFrasa(t, frasa = []) { let h = esc(t); frasa.forEach((f) => { h = h.split(esc(f)).join(`<mark>${esc(f)}</mark>`); }); return h; }
+function dots(el, n, aktif, status = []) {
+  el.innerHTML = Array.from({length:n}, (_, i) => `<i class="${status[i] === true ? "ok" : status[i] === false ? "no" : i === aktif ? "on" : ""}"></i>`).join("");
+}
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.remove("hidden"); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.add("hidden"), 2400); }
+function tanya(teks) {
+  return new Promise((res) => {
+    $("#modalTeks").textContent = teks; $("#modal").classList.remove("hidden");
+    const tutup = (v) => { $("#modal").classList.add("hidden"); res(v); };
+    $("#modalYa").onclick = () => tutup(true); $("#modalTidak").onclick = () => tutup(false);
+  });
+}
+function konfeti() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const warna = ["#ffd166","#ff6f91","#3ee0c5","#7cc4ff","#b58bff"];
+  for (let i = 0; i < 60; i++) {
+    const k = document.createElement("i");
+    k.className = "konfeti";
+    k.style.left = Math.random() * 100 + "vw";
+    k.style.background = pilih(warna);
+    k.style.animationDelay = Math.random() * .8 + "s";
+    k.style.animationDuration = 2 + Math.random() * 1.5 + "s";
+    document.body.appendChild(k);
+    setTimeout(() => k.remove(), 4000);
+  }
+}
+
+/* =====================================================================
+   SUPABASE (database online). Isi dua baris di bawah ini.
+   Jika kosong, skor otomatis disimpan di perangkat (localStorage).
+   ===================================================================== */
+const SUPABASE_URL = "";   // contoh: "https://abcdefgh.supabase.co"
+const SUPABASE_KEY = "";   // anon public key (diawali "eyJ...")
+const PAKAI_SUPABASE = !!(SUPABASE_URL && SUPABASE_KEY);
+async function sb(path, method = "GET", body) {
+  const r = await fetch(SUPABASE_URL.replace(/\/$/, "") + "/rest/v1/" + path, {
+    method,
+    headers: { apikey:SUPABASE_KEY, Authorization:"Bearer " + SUPABASE_KEY, "Content-Type":"application/json",
+      Prefer:"return=representation,resolution=merge-duplicates" },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!r.ok) throw new Error("Supabase " + r.status);
+  const t = await r.text(); return t ? JSON.parse(t) : [];
+}
+
+/* soal acak & kalkulator (dari content.py) */
+function soalAcak() {
+  const [teks, tUn, tSn, satuan, skala] = pilih(KONTEKS_ACAK);
+  const a = acak(2, 20) * skala, b = acak(1, 6) * skala, n = acak(6, 20);
+  const jenis = pilih(["Un", "Sn"]);
+  const un = a + (n - 1) * b, sn = n * (2 * a + (n - 1) * b) / 2;
+  const isi = (s) => s.replace("{a}", rp(a)).replace("{b}", rp(b)).replace(/\{n\}/g, n);
+  const langkah = jenis === "Un"
+    ? [`Kata kunci "ke-${n}" → Uₙ`, `U${n} = ${rp(a)} + (${n} − 1) × ${rp(b)}`, `U${n} = ${rp(a)} + ${rp((n - 1) * b)} = ${rp(un)}`]
+    : [`Kata kunci "total/jumlah" → Sₙ`, `S${n} = ${n}/2 × (2×${rp(a)} + ${n - 1}×${rp(b)})`, `S${n} = ${n}/2 × ${rp(2 * a + (n - 1) * b)} = ${rp(sn)}`];
+  const t = jenis === "Un" ? tUn : tSn;
+  return { id:"acak-" + acak(1000, 9999), level:"Variasi", soal:isi(teks) + " " + isi(t),
+    diketahui:[`a = ${rp(a)}`, `b = ${rp(b)}`, `n = ${n}`], ditanya:isi(t), rumus:jenis,
+    jawaban: jenis === "Un" ? un : sn, satuan, langkah };
+}
+function hitung(a, b, n) {
+  const un = a + (n - 1) * b, sn = n / 2 * (2 * a + (n - 1) * b);
+  return { un, sn, barisan:Array.from({length:Math.min(n, 12)}, (_, i) => a + i * b),
+    langkah_un:["Rumus: Uₙ = a + (n − 1) × b", `U${n} = ${rp(a)} + (${n} − 1) × ${rp(b)}`, `U${n} = ${rp(a)} + ${rp((n - 1) * b)}`, `U${n} = ${rp(un)}`],
+    langkah_sn:["Rumus: Sₙ = n/2 × (2a + (n − 1) × b)", `S${n} = ${n}/2 × (2 × ${rp(a)} + (${n} − 1) × ${rp(b)})`, `S${n} = ${n}/2 × (${rp(2 * a)} + ${rp((n - 1) * b)})`, `S${n} = ${n}/2 × ${rp(2 * a + (n - 1) * b)}`, `S${n} = ${rp(sn)}`] };
+}
+
+/* =====================================================================
+   MUSIK (dibuat langsung oleh browser dengan Web Audio — bebas hak cipta)
+   ===================================================================== */
+const Musik = (() => {
+  let ctx = null, master = null, timer = null, langkah = 0, waktuBerikut = 0, nyala = false, noiseBuf = null;
+  const BPM = 104, DELAPAN = 60 / BPM / 2;
+  const f = (m) => 440 * Math.pow(2, (m - 69) / 12);
+  // 8 birama × 8 ketukan seperdelapan. null = diam.
+  const MELODI = [
+    72,null,76,79, 76,null,74,72,   69,null,72,76, 74,72,null,69,
+    65,69,72,null, 74,72,69,null,   67,71,74,null, 79,77,74,71,
+    79,null,76,72, 74,76,null,79,   81,null,79,76, 72,null,76,null,
+    77,76,74,72,  74,null,69,null,  71,74,79,77, 74,71,67,null ];
+  const AKOR = [[48,52,55],[45,48,52],[41,45,48],[43,47,50],[48,52,55],[45,48,52],[41,45,48],[43,47,50]];
+
+  function siapkan() {
+    if (ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = 0;
+    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 5200;
+    master.connect(lp); lp.connect(ctx.destination);
+    noiseBuf = ctx.createBuffer(1, ctx.sampleRate * 0.2, ctx.sampleRate);
+    const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  }
+  function nada(freq, t, dur, tipe, vol, tujuan) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = tipe; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(tujuan || master); o.start(t); o.stop(t + dur + 0.05);
+  }
+  function hihat(t, vol) {
+    const s = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), g = ctx.createGain();
+    s.buffer = noiseBuf; hp.type = "highpass"; hp.frequency.value = 7000;
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+    s.connect(hp); hp.connect(g); g.connect(master); s.start(t); s.stop(t + 0.06);
+  }
+  function kick(t) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.15);
+    g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.22);
+  }
+  function jadwal() {
+    while (waktuBerikut < ctx.currentTime + 0.15) {
+      const i = langkah % MELODI.length, bar = Math.floor(i / 8), ket = i % 8, t = waktuBerikut;
+      const m = MELODI[i];
+      if (m) { nada(f(m), t, DELAPAN * 1.6, "triangle", 0.16); nada(f(m + 12), t, DELAPAN * 0.9, "sine", 0.03); }
+      const ak = AKOR[bar];
+      if (ket === 0 || ket === 4) nada(f(ak[0] - 12), t, DELAPAN * 3.5, "sine", 0.22);
+      if (ket % 2 === 1) nada(f(ak[(ket >> 1) % 3] + 12), t, DELAPAN * 0.8, "square", 0.018);
+      if (ket === 0 || ket === 4) kick(t);
+      if (ket % 2 === 1) hihat(t, 0.05);
+      langkah++; waktuBerikut += DELAPAN;
+    }
+  }
+  function mulai() {
+    siapkan(); if (!ctx) return false;
+    ctx.resume();
+    if (nyala) return true;
+    nyala = true; waktuBerikut = ctx.currentTime + 0.08;
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setTargetAtTime(0.55, ctx.currentTime, 0.4);
+    timer = setInterval(jadwal, 25); jadwal();
+    return true;
+  }
+  function berhenti() {
+    if (!ctx || !nyala) return;
+    nyala = false; clearInterval(timer);
+    master.gain.setTargetAtTime(0, ctx.currentTime, 0.15);
+  }
+  function efek(jenis) {
+    siapkan(); if (!ctx) return; ctx.resume();
+    const t = ctx.currentTime + 0.01, out = ctx.destination;
+    const g = ctx.createGain(); g.gain.value = 0.9; g.connect(out);
+    if (jenis === "benar") { [76, 79, 84].forEach((m, i) => nada(f(m), t + i * 0.09, 0.25, "triangle", 0.3, g)); }
+    else if (jenis === "salah") { nada(f(52), t, 0.25, "sawtooth", 0.08, g); nada(f(49), t + 0.12, 0.3, "sawtooth", 0.08, g); }
+    else if (jenis === "menang") { [72, 76, 79, 84, 79, 84].forEach((m, i) => nada(f(m), t + i * 0.11, 0.3, "triangle", 0.28, g)); }
+    else { nada(f(84), t, 0.07, "sine", 0.12, g); }
+  }
+  return { mulai, berhenti, efek, get nyala() { return nyala; } };
+})();
+function segarkanTombolMusik() {
+  const b = $("#btnMusik");
+  b.classList.toggle("nyala", Musik.nyala);
+  b.textContent = Musik.nyala ? "♫" : "♪";
+  b.setAttribute("aria-pressed", Musik.nyala);
+}
+$("#btnMusik").onclick = () => {
+  if (Musik.nyala) { Musik.berhenti(); simpan("musik", false); toast("Musik dimatikan"); }
+  else { Musik.mulai(); simpan("musik", true); toast("Musik dinyalakan 🎵"); }
+  segarkanTombolMusik();
+};
+document.addEventListener("click", (e) => { if (e.target.closest(".menu-item, .chip")) Musik.efek("klik"); });
+
+/* =====================================================================
+   3D (three.js)
+   ===================================================================== */
+const ADA3D = typeof THREE !== "undefined" && (() => {
+  try { const c = document.createElement("canvas"); return !!(c.getContext("webgl") || c.getContext("experimental-webgl")); } catch (e) { return false; }
+})();
+const GERAK = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+const PALET = [0xff6f91, 0xffa45c, 0xffd166, 0x3ee0c5, 0x7cc4ff, 0x8b7bff, 0xd36bff];
+
+function labelSprite(teks, warna = "#241f5c", lebar = 1.6) {
+  const c = document.createElement("canvas"); c.width = 256; c.height = 128;
+  const g = c.getContext("2d");
+  g.fillStyle = "rgba(255,255,255,.92)";
+  g.beginPath();
+  if (g.roundRect) g.roundRect(24, 18, 208, 92, 30); else g.rect(24, 18, 208, 92);
+  g.fill();
+  g.font = "800 62px 'Baloo 2', system-ui, sans-serif"; g.textAlign = "center"; g.textBaseline = "middle";
+  g.fillStyle = warna; g.fillText(teks, 128, 68);
+  const tex = new THREE.CanvasTexture(c);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map:tex, depthTest:false, transparent:true }));
+  s.scale.set(lebar, lebar / 2, 1);
+  return s;
+}
+
+function buatPanggung(container, { orbit = false } = {}) {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 500);
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  container.appendChild(renderer.domElement);
+  scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x2a1d5c, 0.85));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.9); sun.position.set(6, 14, 10); scene.add(sun);
+  const pink = new THREE.PointLight(0xff6f91, 0.9, 60); pink.position.set(-10, 6, 6); scene.add(pink);
+  const teal = new THREE.PointLight(0x3ee0c5, 0.8, 60); teal.position.set(10, 4, -6); scene.add(teal);
+  let controls = null;
+  if (orbit && THREE.OrbitControls) {
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; controls.enablePan = false; controls.maxPolarAngle = Math.PI * 0.49;
+  }
+  const tiap = [];
+  function ukur() {
+    const w = container.clientWidth, h = container.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    renderer.domElement.style.width = "100%"; renderer.domElement.style.height = "100%";
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(ukur).observe(container); ukur();
+  const jam = new THREE.Clock();
+  let hidup = true;
+  (function loop() {
+    if (!hidup) return;
+    requestAnimationFrame(loop);
+    if (!container.getClientRects().length) return;
+    const t = jam.getElapsedTime();
+    tiap.forEach((fn) => fn(t));
+    controls && controls.update();
+    renderer.render(scene, camera);
+  })();
+  return { scene, camera, controls, tiap, matikan() { hidup = false; renderer.dispose(); container.innerHTML = ""; } };
+}
+
+function bintang(scene, jumlah = 500, radius = 60) {
+  const geo = new THREE.BufferGeometry(), pos = new Float32Array(jumlah * 3);
+  for (let i = 0; i < jumlah; i++) {
+    const r = radius * (0.5 + Math.random() * 0.5), th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+    pos[i * 3] = r * Math.sin(ph) * Math.cos(th); pos[i * 3 + 1] = r * Math.cos(ph); pos[i * 3 + 2] = r * Math.sin(ph) * Math.sin(th);
+  }
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const p = new THREE.Points(geo, new THREE.PointsMaterial({ color:0xffffff, size:0.18, transparent:true, opacity:0.85 }));
+  scene.add(p); return p;
+}
+
+/* Tangga spiral: kolom ke-i berisi (1 + 2i) kubus → barisan aritmetika 1, 3, 5, 7, … */
+function tanggaSpiral(pg, { kolom = 9, angka = true } = {}) {
+  const grup = new THREE.Group(); pg.scene.add(grup);
+  const geo = new THREE.BoxGeometry(0.82, 0.82, 0.82);
+  const kubus = [];
+  for (let i = 0; i < kolom; i++) {
+    const tinggi = 1 + i, sudut = i / kolom * Math.PI * 2, R = 4.2;
+    const warna = new THREE.Color(PALET[i % PALET.length]);
+    const mat = new THREE.MeshStandardMaterial({ color:warna, roughness:0.35, metalness:0.15, emissive:warna, emissiveIntensity:0.18 });
+    const kol = new THREE.Group();
+    kol.position.set(Math.cos(sudut) * R, 0, Math.sin(sudut) * R);
+    for (let k = 0; k < tinggi; k++) {
+      const m = new THREE.Mesh(geo, mat); m.position.y = k * 0.9 + 0.45; kol.add(m); kubus.push({ m, i, k });
+    }
+    if (angka) { const l = labelSprite(String(tinggi), "#" + warna.getHexString(), 1.3); l.position.y = tinggi * 0.9 + 0.9; kol.add(l); }
+    grup.add(kol);
+  }
+  // cincin bercahaya
+  const cincin = new THREE.Mesh(new THREE.TorusGeometry(4.2, 0.05, 8, 80), new THREE.MeshBasicMaterial({ color:0xffd166, transparent:true, opacity:0.6 }));
+  cincin.rotation.x = Math.PI / 2; grup.add(cincin);
+  const bt = bintang(pg.scene);
+  pg.camera.position.set(0, 7.5, 14); pg.camera.lookAt(0, 3.6, 0);
+  pg.tiap.push((t) => {
+    if (!GERAK) return;
+    grup.rotation.y = t * 0.25;
+    bt.rotation.y = t * 0.01;
+    kubus.forEach(({ m, i, k }) => { m.rotation.y = Math.sin(t * 1.2 + i * 0.5) * 0.25; m.position.y = k * 0.9 + 0.45 + Math.sin(t * 2 + i * 0.6 + k * 0.3) * 0.06; });
+  });
+  return grup;
+}
+
+/* Bilangan melayang di intro */
+function angkaMelayang(pg) {
+  const isi = ["2", "5", "8", "11", "14", "+3", "Uₙ", "Sₙ", "b", "a"];
+  const s = isi.map((t, i) => {
+    const sp = labelSprite(t, ["#ff6f91", "#e08a12", "#13867a", "#3a3fc4", "#8b3fd1"][i % 5], 1.5);
+    const sudut = i / isi.length * Math.PI * 2;
+    sp.position.set(Math.cos(sudut) * 8, 2 + (i % 4) * 1.6, Math.sin(sudut) * 8 - 2);
+    pg.scene.add(sp); return { sp, sudut, i };
+  });
+  pg.tiap.push((t) => {
+    if (!GERAK) return;
+    s.forEach(({ sp, sudut, i }) => {
+      const a = sudut - t * 0.12;
+      sp.position.x = Math.cos(a) * 8; sp.position.z = Math.sin(a) * 8 - 2;
+      sp.position.y = 2 + (i % 4) * 1.6 + Math.sin(t * 1.5 + i) * 0.4;
+    });
+  });
+}
+
+/* Lab 3D: kolom kubus = suku barisan, tumbuh dengan animasi */
+function buatLab(container) {
+  const pg = buatPanggung(container, { orbit:true });
+  const lantai = new THREE.Mesh(new THREE.CircleGeometry(16, 64), new THREE.MeshStandardMaterial({ color:0x221d63, roughness:0.9 }));
+  lantai.rotation.x = -Math.PI / 2; lantai.position.y = -0.02; pg.scene.add(lantai);
+  const grid = new THREE.GridHelper(30, 30, 0x5a52c9, 0x2f2a85); grid.position.y = 0; pg.scene.add(grid);
+  bintang(pg.scene, 300, 80);
+  const grup = new THREE.Group(); pg.scene.add(grup);
+  const geo = new THREE.BoxGeometry(0.88, 0.88, 0.88);
+  let kolom = [], t0 = 0, waktu = 0;
+  pg.tiap.push((t) => {
+    waktu = t;
+    kolom.forEach((k, i) => {
+      const p = GERAK ? Math.min(1, Math.max(0, (t - t0 - i * 0.07) / 0.5)) : 1;
+      const e = 1 - Math.pow(1 - p, 3);
+      k.isi.scale.y = Math.max(0.001, e);
+      k.lbl.material.opacity = e;
+      if (k.sorot && GERAK) k.isi.children.forEach((m) => { m.material.emissiveIntensity = 0.35 + Math.sin(t * 4) * 0.2; });
+    });
+  });
+  function bersih() {
+    grup.traverse((o) => { if (o.material) { o.material.map && o.material.map.dispose(); o.material.dispose(); } });
+    grup.clear(); kolom = [];
+  }
+  function update(a, b, n, mode) {
+    bersih();
+    const nilai = Array.from({ length:n }, (_, i) => a + i * b);
+    const jarak = 1.25, lebar = n * jarak;
+    nilai.forEach((v, i) => {
+      const tinggi = Math.max(0, Math.round(v));
+      const x = i * jarak - lebar / 2 + jarak / 2;
+      const sorot = mode === "Un" && i === n - 1;
+      let warna = mode === "Sn" ? 0x3ee0c5 : 0x7cc4ff;
+      if (sorot) warna = 0xff6f91;
+      if (tinggi === 0) warna = 0x8a86b8;
+      const mat = new THREE.MeshStandardMaterial({ color:warna, roughness:0.3, metalness:0.1, emissive:warna, emissiveIntensity:sorot ? 0.45 : 0.15 });
+      const isi = new THREE.Group(); isi.position.x = x;
+      const jumlah = Math.max(1, tinggi);
+      for (let k = 0; k < jumlah; k++) {
+        const m = new THREE.Mesh(geo, mat.clone());
+        m.position.y = tinggi === 0 ? 0.05 : k * 0.92 + 0.46;
+        if (tinggi === 0) m.scale.y = 0.1;
+        isi.add(m);
+      }
+      grup.add(isi);
+      const lbl = labelSprite(String(v), sorot ? "#d6325f" : mode === "Sn" ? "#0f7d6c" : "#2459a8");
+      lbl.position.set(x, Math.max(1, tinggi) * 0.92 + 0.9, 0); grup.add(lbl);
+      const idx = labelSprite("U" + (i + 1), "#5a548f", 1.15); idx.position.set(x, -0.5, 0.95); grup.add(idx);
+      kolom.push({ isi, lbl, sorot });
+    });
+    if (mode === "Sn") {
+      const total = nilai.reduce((s, v) => s + v, 0);
+      const l = labelSprite("Sₙ = " + rp(total), "#d6325f", 3.4);
+      const maxH = Math.max(...nilai, 1) * 0.92;
+      l.position.set(0, maxH + 2.4, 0); grup.add(l); kolom.push({ isi:new THREE.Group(), lbl:l, sorot:false });
+    }
+    const maxH = Math.max(...nilai, 1) * 0.92;
+    const jauh = Math.max(lebar, maxH) * 1.15 + 5;
+    pg.controls && pg.controls.target.set(0, maxH / 2, 0);
+    pg.camera.position.set(jauh * 0.45, maxH / 2 + jauh * 0.4, jauh);
+    pg.controls ? pg.controls.update() : pg.camera.lookAt(0, maxH / 2, 0);
+    t0 = waktu;
+    return nilai;
+  }
+  return { update };
+}
+
+/* =====================================================================
+   INTRO
+   ===================================================================== */
+(function siapkanIntro() {
+  const j = $("#introJudul");
+  const kata = j.textContent.split(" ");
+  let n = 0;
+  j.innerHTML = kata.map((w) => {
+    const kelas = /zizah/i.test(w) ? "zizah" : /belajar/i.test(w) ? "belajar" : "";
+    return `<span class="${kelas}" style="white-space:nowrap">` + [...w].map((h) => `<span class="huruf" aria-hidden="true" style="animation-delay:${(n++) * 0.06}s">${esc(h)}</span>`).join("") + "</span>";
+  }).join(" ");
+})();
+let introPg = null;
+if (ADA3D) { introPg = buatPanggung($("#intro3d")); tanggaSpiral(introPg); angkaMelayang(introPg); introPg.camera.position.set(0, 6, 17); introPg.camera.lookAt(0, 3.5, 0); }
+function tutupIntro(denganMusik) {
+  if (denganMusik) { Musik.mulai(); simpan("musik", true); } else simpan("musik", false);
+  segarkanTombolMusik();
+  $("#intro").classList.add("keluar");
+  setTimeout(() => { $("#intro").remove(); introPg && introPg.matikan(); introPg = null; }, 750);
+  tampil(location.hash.slice(1) || (state.siswa ? "home" : "login"));
+}
+$("#btnMulai").onclick = () => tutupIntro(true);
+$("#btnMulaiSunyi").onclick = () => tutupIntro(false);
+
+/* =====================================================================
+   APLIKASI
+   ===================================================================== */
+const JUDUL = { login:"ARITMA", home:"Beranda", materi:"Materi", lab:"Lab 3D", kalkulator:"Kalkulator", latihan:"Latihan Soal", literasi:"Tes Literasi", progres:"Progres", rekap:"Rekap Nilai" };
+const state = { siswa:null, mIdx:0, mStep:0, latihan:[], lIdx:0, lHasil:[], tIdx:0, jawabLit:{}, labMode:"Un" };
+
+function catatSkor(jenis, skor, maks, detail = {}) {
+  const k = "skor:" + state.siswa.kode;
+  const arr = muat(k) || [];
+  const baris = { jenis, skor, maks, detail, waktu:new Date().toISOString() };
+  arr.unshift(baris);
+  simpan(k, arr.slice(0, 100));
+  if (PAKAI_SUPABASE) {
+    sb("skor", "POST", { kode:state.siswa.kode, jenis, skor, maks, detail:JSON.stringify(detail) })
+      .then(() => toast("Skor tersimpan online ☁️"))
+      .catch(() => toast("Skor tersimpan di perangkat (internet/database tidak tersambung)"));
+  }
+}
+
+function tampil(view) {
+  if (!JUDUL[view]) view = "home";
+  if (!state.siswa && view !== "login") view = "login";
+  document.querySelectorAll(".view").forEach((v) => v.classList.add("hidden"));
+  $("#v-" + view).classList.remove("hidden");
+  $("#judul").textContent = JUDUL[view];
+  $("#btnBack").classList.toggle("hidden", view === "login" || view === "home");
+  window.scrollTo(0, 0);
+  const init = { login:renderLogin, home:renderHome, materi:renderMateri, lab:renderLab, latihan:mulaiLatihan, literasi:renderLiterasi, progres:renderProgres, rekap:renderRekap };
+  init[view] && init[view]();
+}
+const go = (v) => { if (location.hash === "#" + v) tampil(v); else location.hash = v; };
+window.addEventListener("hashchange", () => { if (!$("#intro")) tampil(location.hash.slice(1) || "home"); });
+$("#btnBack").onclick = () => go("home");
+document.querySelectorAll("[data-go]").forEach((b) => (b.onclick = () => go(b.dataset.go)));
+
+/* ---- login ---- */
+let heroPg = null;
+function renderLogin() {
+  if (ADA3D && !heroPg) { heroPg = buatPanggung($("#hero3d")); tanggaSpiral(heroPg, { kolom:7 }); heroPg.camera.position.set(0, 6.5, 13); heroPg.camera.lookAt(0, 3, 0); }
+}
+$("#formLogin").onsubmit = (e) => {
+  e.preventDefault();
+  const kode = $("#inKode").value.trim().toUpperCase();
+  if (!/^[A-Z0-9_-]{2,20}$/.test(kode)) { $("#loginErr").textContent = "Kode siswa 2–20 huruf/angka, contoh: S01"; return; }
+  $("#loginErr").textContent = "";
+  const lama = muat("siswa:" + kode) || {};
+  state.siswa = { kode, nama:$("#inNama").value.trim().slice(0, 60) || lama.nama || "", kelas:$("#inKelas").value.trim().slice(0, 10) || lama.kelas || "" };
+  simpan("siswa:" + kode, state.siswa); simpan("siswa", state.siswa);
+  if (PAKAI_SUPABASE) sb("siswa?on_conflict=kode", "POST", { kode, nama:state.siswa.nama, kelas:state.siswa.kelas }).catch(() => {});
+  Musik.efek("benar");
+  go("home");
+};
+$("#btnLogout").onclick = () => {
+  state.siswa = null; hapus("siswa");
+  $("#userBadge").classList.add("hidden");
+  go("login");
+};
+const SAPAAN = [
+  "Kak Zizah siap menemani belajar hari ini. Mulai dari Materi dulu, ya!",
+  "Ingat: \"ke-…\" pakai Uₙ, \"jumlah/total\" pakai Sₙ.",
+  "Sudah coba Lab 3D? Geser angkanya dan lihat kubusnya tumbuh!",
+  "Salah itu wajar. Coba lagi pelan-pelan, Kak Zizah yakin kamu bisa!",
+];
+function renderHome() {
+  const s = state.siswa;
+  $("#hello").innerHTML = `Halo, ${esc(s.nama || s.kode)}! 🌟<small>${esc(pilih(SAPAAN))}</small>`;
+  $("#userBadge").textContent = s.kode; $("#userBadge").classList.remove("hidden");
+}
+
+/* ---- materi ---- */
+function renderMateri() {
+  const m = MATERI[state.mIdx];
+  dots($("#materiDots"), MATERI.length, state.mIdx);
+  const langkah = m.contoh.langkah.slice(0, state.mStep).map((l) => `<li>${esc(l)}</li>`).join("");
+  const habis = state.mStep >= m.contoh.langkah.length;
+  $("#materiCard").innerHTML = `
+    <div class="ikon">${m.ikon}</div>
+    <h2>${esc(m.judul)}</h2>
+    <p class="c-text">${esc(m.penjelasan)}</p>
+    <div class="rumus-box">${esc(m.rumus)}</div>
+    <div class="contoh">
+      <div><b>Contoh:</b> <span class="soal">${tandaiAngka(m.contoh.soal)}</span></div>
+      ${langkah ? `<ol class="steps">${langkah}</ol>` : ""}
+      ${habis ? "" : `<button class="btn full" id="btnStep">👉 Lihat langkah ${state.mStep + 1} dari ${m.contoh.langkah.length}</button>`}
+    </div>
+    <div class="ingat">💡 <b>Kata Kak Zizah:</b> ${esc(m.ingat)}</div>
+    ${[2, 3].includes(m.id) ? `<p><button class="btn full" id="btnKe3d">🧊 Lihat di Lab 3D</button></p>` : ""}`;
+  $("#btnStep") && ($("#btnStep").onclick = () => { state.mStep++; Musik.efek("klik"); renderMateri(); });
+  $("#btnKe3d") && ($("#btnKe3d").onclick = () => { state.labMode = m.id === 2 ? "Un" : "Sn"; go("lab"); });
+  $("#mPrev").disabled = state.mIdx === 0;
+  $("#mNext").textContent = state.mIdx === MATERI.length - 1 ? "Ke Latihan ✏️" : "Berikutnya ›";
+}
+$("#mPrev").onclick = () => { if (state.mIdx > 0) { state.mIdx--; state.mStep = 0; renderMateri(); } };
+$("#mNext").onclick = () => { if (state.mIdx < MATERI.length - 1) { state.mIdx++; state.mStep = 0; renderMateri(); } else go("latihan"); };
+
+/* ---- lab 3D ---- */
+let lab = null;
+function renderLab() {
+  if (ADA3D && !lab) lab = buatLab($("#lab3d"));
+  if (!ADA3D && !$("#lab3d").textContent) $("#lab3d").innerHTML = `<p style="padding:20px" class="info">Tampilan 3D belum bisa dimuat di perangkat ini. Pastikan internet tersambung lalu muat ulang halaman.</p>`;
+  const a = +$("#sA").value, b = +$("#sB").value, n = +$("#sN").value;
+  $("#vA").textContent = a; $("#vB").textContent = b; $("#vN").textContent = n;
+  const nilai = lab ? lab.update(a, b, n, state.labMode) : Array.from({ length:n }, (_, i) => a + i * b);
+  const un = a + (n - 1) * b, sn = (n * (2 * a + (n - 1) * b)) / 2;
+  $("#modeUn").classList.toggle("aktif", state.labMode === "Un");
+  $("#modeSn").classList.toggle("aktif", state.labMode === "Sn");
+  $("#labInfo").innerHTML = state.labMode === "Un"
+    ? `Kolom <b class="c-rumus">merah muda</b> = suku ke-${n} saja.<br><span class="c-rumus">U${n} = a + (n − 1)b</span> = <span class="c-kerja">${a} + ${n - 1}×${b} = <b>${un}</b></span>`
+    : `Semua kolom <b style="color:var(--teal)">hijau tosca</b> dijumlahkan.<br><span class="c-rumus">S${n} = n/2 × (2a + (n − 1)b)</span> = <span class="c-kerja">${nilai.join(" + ")} = <b>${sn}</b></span>`;
+}
+["#sA", "#sB", "#sN"].forEach((s) => ($(s).oninput = renderLab));
+$("#modeUn").onclick = () => { state.labMode = "Un"; renderLab(); };
+$("#modeSn").onclick = () => { state.labMode = "Sn"; renderLab(); };
+
+/* ---- kalkulator ---- */
+$("#formHitung").onsubmit = (e) => {
+  e.preventDefault();
+  const a = parseAngka($("#kA").value), b = parseAngka($("#kB").value), n = parseAngka($("#kN").value);
+  if (a === null || b === null || n === null || n < 1 || n !== Math.floor(n) || n > 10000) { toast("Isi a dan b dengan angka, n bilangan bulat 1–10000."); Musik.efek("salah"); return; }
+  const h = hitung(a, b, n);
+  const daftar = (arr) => `<div class="rumus-box">${esc(arr[0])}</div><ol class="steps">${arr.slice(1).map((l) => `<li>${esc(l)}</li>`).join("")}</ol>`;
+  $("#hasilHitung").innerHTML = `
+    <div class="card"><b>Barisan:</b> <span class="c-kerja">${h.barisan.map(rp).join(", ")}${h.barisan.length < n ? ", …" : ""}</span></div>
+    <div class="card"><h3>🎯 Suku ke-${n} (satu nilai)</h3>${daftar(h.langkah_un)}</div>
+    <div class="card"><h3>➕ Jumlah ${n} suku (total)</h3>${daftar(h.langkah_sn)}</div>
+    <div class="ingat">💡 Ditanya "suku ke-…"? pakai Uₙ. Ditanya "jumlah/total"? pakai Sₙ.</div>`;
+  Musik.efek("benar");
+};
+
+/* ---- latihan ---- */
+const NAMA_RUMUS = { b:"Beda (b)", Un:"Suku ke-n (Uₙ)", Sn:"Jumlah n suku (Sₙ)" };
+function mulaiLatihan() {
+  if (!state.latihan.length) state.latihan = LATIHAN_DASAR.slice();
+  if (state.lIdx >= state.latihan.length) return ringkasLatihan();
+  renderSoal();
+}
+function renderSoal() {
+  const s = state.latihan[state.lIdx];
+  const ss = { rumusOk:false, coba:0, selesai:false, langkah:0 };
+  dots($("#latDots"), state.latihan.length, state.lIdx, state.lHasil);
+  const card = $("#latCard");
+  card.innerHTML = `
+    <div class="row" style="align-items:center"><span class="level ${esc(s.level)}">${esc(s.level)}</span> <small class="info">Soal ${state.lIdx + 1}/${state.latihan.length}</small></div>
+    <p class="soal">${tandaiAngka(s.soal)}</p>
+    <details><summary>Bantu aku: Diketahui &amp; Ditanya</summary>
+      <p class="c-kerja">Diketahui: ${s.diketahui.map(esc).join(", ")}<br>Ditanya: ${esc(s.ditanya)}</p></details>
+    <p><b>Langkah 1.</b> Rumus apa yang kamu pakai?</p>
+    <div class="chips" id="chipRumus">${Object.entries(NAMA_RUMUS).map(([k, v]) => `<button class="chip" data-r="${k}">${v}</button>`).join("")}</div>
+    <div id="fbRumus"></div>
+    <div id="tahapHitung" class="hidden">
+      <p><b>Langkah 2.</b> Hitung jawabannya ${s.satuan ? `(${esc(s.satuan)})` : ""}</p>
+      <div class="jawab-row"><input id="inJawab" inputmode="decimal" placeholder="Jawabanmu"><button class="btn primary" id="btnCek">Cek</button></div>
+      <div id="fbJawab"></div>
+    </div>
+    <div id="pembahasan" style="margin-top:10px"></div>
+    <div id="lanjut" style="margin-top:12px"></div>`;
+  card.querySelectorAll("#chipRumus .chip").forEach((c) => (c.onclick = () => {
+    if (ss.rumusOk) return;
+    const benar = c.dataset.r === s.rumus;
+    c.classList.add(benar ? "ok" : "no");
+    Musik.efek(benar ? "benar" : "salah");
+    $("#fbRumus").innerHTML = benar
+      ? `<div class="feedback ok">Tepat! Pakai ${NAMA_RUMUS[s.rumus]}.</div>`
+      : `<div class="feedback tip">Coba lagi. Lihat kata tanyanya: "${esc(s.ditanya)}". ${s.rumus === "Sn" ? "Ada kata jumlah/total → dijumlahkan." : s.rumus === "Un" ? "Ada kata \"ke-…\" → satu nilai saja." : "Yang dicari selisih dua suku berurutan."}</div>`;
+    if (benar) { ss.rumusOk = true; $("#tahapHitung").classList.remove("hidden"); $("#inJawab").focus(); }
+  }));
+  const tampilPembahasan = () => {
+    const sudah = s.langkah.slice(0, ss.langkah).map((l) => `<li>${esc(l)}</li>`).join("");
+    $("#pembahasan").innerHTML = `<b>Pembahasan:</b><ol class="steps">${sudah}</ol>` + (ss.langkah < s.langkah.length ? `<button class="btn full" id="btnLangkah" style="margin-top:8px">👉 Langkah berikutnya</button>` : "");
+    $("#btnLangkah") && ($("#btnLangkah").onclick = () => { ss.langkah++; tampilPembahasan(); });
+  };
+  const akhiri = (benar) => {
+    ss.selesai = true; state.lHasil[state.lIdx] = benar;
+    dots($("#latDots"), state.latihan.length, state.lIdx, state.lHasil);
+    $("#lanjut").innerHTML = `<button class="btn primary full" id="btnLanjut">${state.lIdx < state.latihan.length - 1 ? "Soal berikutnya ›" : "Lihat hasil"}</button>`;
+    $("#btnLanjut").onclick = () => { state.lIdx++; mulaiLatihan(); };
+  };
+  $("#btnCek").onclick = () => {
+    if (ss.selesai) return;
+    const v = parseAngka($("#inJawab").value);
+    if (v === null) return toast("Isi jawaban dengan angka ya");
+    ss.coba++;
+    if (Math.abs(v - s.jawaban) < 1e-6) {
+      Musik.efek("benar");
+      $("#fbJawab").innerHTML = `<div class="feedback ok">✔ Benar! ${rp(s.jawaban)} ${esc(s.satuan)}. Hebat!</div>`;
+      ss.langkah = s.langkah.length; tampilPembahasan(); akhiri(ss.coba === 1);
+    } else if (ss.coba < 2) {
+      Musik.efek("salah");
+      $("#fbJawab").innerHTML = `<div class="feedback no">Belum tepat. Cek lagi perhitunganmu, lalu coba sekali lagi.</div>`;
+    } else {
+      Musik.efek("salah");
+      $("#fbJawab").innerHTML = `<div class="feedback no">Jawaban yang benar: ${rp(s.jawaban)} ${esc(s.satuan)}. Yuk lihat langkahnya 👇</div>`;
+      ss.langkah = 1; tampilPembahasan(); akhiri(false);
+    }
+  };
+  $("#inJawab").onkeydown = (e) => { if (e.key === "Enter") $("#btnCek").click(); };
+}
+function ringkasLatihan() {
+  const benar = state.lHasil.filter(Boolean).length, total = state.latihan.length;
+  dots($("#latDots"), total, -1, state.lHasil);
+  $("#latCard").innerHTML = `
+    <h2>Hasil Latihan</h2>
+    <div class="skor-besar">${benar}/${total}</div>
+    <p class="info" style="text-align:center">benar pada percobaan pertama</p>
+    <div style="display:grid;gap:10px">
+      <button class="btn primary full" id="btnAcak">🎲 Coba soal variasi</button>
+      <button class="btn full" id="btnUlang">↻ Ulangi latihan</button>
+    </div>`;
+  if (!ringkasLatihan.tersimpan) {
+    ringkasLatihan.tersimpan = true;
+    catatSkor("latihan", benar, total);
+    if (benar / total >= 0.6) { konfeti(); Musik.efek("menang"); }
+  }
+  $("#btnUlang").onclick = () => { state.lIdx = 0; state.lHasil = []; state.latihan = []; ringkasLatihan.tersimpan = false; mulaiLatihan(); };
+  $("#btnAcak").onclick = () => { state.latihan.push(soalAcak()); renderSoal(); };
+}
+
+/* ---- tes literasi ---- */
+function renderLiterasi() {
+  const L = LITERASI, s = L[state.tIdx];
+  const jaw = (state.jawabLit[s.id] = state.jawabLit[s.id] || []);
+  dots($("#litDots"), L.length, state.tIdx);
+  $("#litCard").innerHTML = `
+    <div class="indikator">Soal ${state.tIdx + 1}/${L.length} · ${esc(s.indikator)}</div>
+    <h2>${esc(s.judul)}</h2>
+    <p class="soal">${tandaiFrasa(s.soal, s.penting)}</p>
+    <div class="ingat">💡 Bagian <mark>berwarna kuning</mark> adalah informasi penting. Kerjakan per tahap.</div>
+    ${s.tahap.map((t, i) => `
+      <div class="tahap"><div><b>${esc(t.teks)}</b> <small class="info">(skor ${t.skor})</small></div>
+      ${t.tipe === "angka"
+        ? `<input data-i="${i}" id="lit-${s.id}-${i}" class="inLit" inputmode="decimal" value="${esc(jaw[i] == null ? "" : jaw[i])}" placeholder="Tulis angka">`
+        : t.opsi.map((o, k) => `<button class="btn opsi ${String(jaw[i]) === String(k) ? "primary" : ""}" data-i="${i}" data-k="${k}">${esc(o)}</button>`).join("")}
+      </div>`).join("")}
+    <div class="row" style="margin-top:16px">
+      <button class="btn" id="tPrev" ${state.tIdx === 0 ? "disabled" : ""}>‹ Sebelumnya</button>
+      <button class="btn primary" id="tNext">${state.tIdx === L.length - 1 ? "Kumpulkan ✔" : "Berikutnya ›"}</button>
+    </div>`;
+  document.querySelectorAll(".inLit").forEach((el) => (el.oninput = () => { jaw[+el.dataset.i] = el.value; }));
+  document.querySelectorAll(".opsi").forEach((el) => (el.onclick = () => { jaw[+el.dataset.i] = el.dataset.k; Musik.efek("klik"); renderLiterasi(); }));
+  $("#tPrev").onclick = () => { state.tIdx--; renderLiterasi(); };
+  $("#tNext").onclick = async () => {
+    if (state.tIdx < L.length - 1) { state.tIdx++; renderLiterasi(); return; }
+    const kosong = L.reduce((n, q) => n + q.tahap.filter((_, i) => !(state.jawabLit[q.id] || [])[i]).length, 0);
+    if (kosong && !(await tanya(`Masih ada ${kosong} tahap kosong. Tetap kumpulkan?`))) return;
+    kumpulkanLiterasi();
+  };
+}
+function kumpulkanLiterasi() {
+  let total = 0, maks = 0;
+  const per = LITERASI.map((s) => {
+    const jaw = state.jawabLit[s.id] || [];
+    let skor = 0;
+    const rinci = s.tahap.map((t, i) => {
+      const j = jaw[i];
+      let benar;
+      if (t.tipe === "angka") { const v = parseAngka(j); benar = v !== null && Math.abs(v - t.kunci) < 1e-6; }
+      else benar = String(j) === String(t.kunci);
+      const dapat = benar ? t.skor : 0; skor += dapat;
+      return { benar, skor:dapat, maks:t.skor };
+    });
+    const m = s.tahap.reduce((x, t) => x + t.skor, 0);
+    total += skor; maks += m;
+    return { indikator:s.indikator, skor, maks:m, tahap:rinci, pembahasan:s.pembahasan };
+  });
+  const detail = {}; per.forEach((p) => (detail[p.indikator] = p.skor));
+  catatSkor("literasi", total, maks, detail);
+  if (total / maks >= 0.6) { konfeti(); Musik.efek("menang"); } else Musik.efek("benar");
+  $("#litDots").innerHTML = "";
+  $("#litCard").innerHTML = `
+    <h2>Hasil Tes Literasi Matematika</h2>
+    <div class="skor-besar">${total}/${maks}</div>
+    <p class="info" style="text-align:center">${total / maks >= 0.6 ? "Keren! Kak Zizah bangga sama kamu 🎉" : "Ayo pelajari pembahasannya, lalu coba lagi ya 💪"}</p>
+    ${per.map((p) => `
+      <div class="tahap">
+        <div><b>${esc(p.indikator)}</b> — ${p.skor}/${p.maks}</div>
+        <div class="bar"><div style="width:${(p.skor / p.maks) * 100}%"></div></div>
+        <small>${p.tahap.map((t, i) => `Tahap ${i + 1}: ${t.benar ? "✔" : "✘"}`).join(" · ")}</small>
+        <details><summary>Lihat pembahasan</summary><ol class="steps">${p.pembahasan.map((l) => `<li>${esc(l)}</li>`).join("")}</ol></details>
+      </div>`).join("")}
+    <button class="btn primary full" id="tUlang" style="margin-top:16px">↻ Kerjakan ulang</button>`;
+  $("#tUlang").onclick = () => { state.jawabLit = {}; state.tIdx = 0; renderLiterasi(); };
+  window.scrollTo(0, 0);
+}
+
+/* ---- progres ---- */
+async function renderRekap() {
+  const el = $("#rekapList");
+  if (!PAKAI_SUPABASE) { el.innerHTML = `<div class="card">Rekap semua siswa butuh database Supabase. Saat ini skor hanya tersimpan di perangkat masing-masing siswa.</div>`; return; }
+  el.innerHTML = `<div class="card">Memuat data…</div>`;
+  try {
+    const [siswa, skor] = await Promise.all([sb("siswa?select=*&order=kode"), sb("skor?select=*&order=waktu.desc&limit=1000")]);
+    const nama = {}; siswa.forEach((s) => (nama[s.kode] = s));
+    const ringkas = {};
+    skor.forEach((r) => {
+      const x = (ringkas[r.kode] = ringkas[r.kode] || { lat:null, lit:null, n:0 });
+      x.n++;
+      if (r.jenis === "latihan" && !x.lat) x.lat = r;
+      if (r.jenis === "literasi" && !x.lit) x.lit = r;
+    });
+    const kodes = [...new Set([...siswa.map((s) => s.kode), ...Object.keys(ringkas)])].sort();
+    const sel = (r) => r ? `${r.skor}/${r.maks}` : "–";
+    el.innerHTML = `<div class="card"><h3>Rekap Nilai Semua Siswa</h3>
+      <p class="info"><small>${kodes.length} siswa · ${skor.length} pengerjaan · nilai terakhir tiap siswa</small></p>
+      <div class="tbl-wrap"><table class="tbl"><tr><th>Kode</th><th>Nama</th><th>Kelas</th><th>Latihan</th><th>Tes Literasi</th><th>Total kerja</th></tr>
+      ${kodes.map((k) => { const s = nama[k] || {}, x = ringkas[k] || {}; return `<tr><td><b>${esc(k)}</b></td><td>${esc(s.nama || "")}</td><td>${esc(s.kelas || "")}</td><td>${sel(x.lat)}</td><td>${sel(x.lit)}</td><td>${x.n || 0}×</td></tr>`; }).join("")}
+      </table></div><p></p><button class="btn full" id="btnMuatRekap">↻ Muat ulang</button></div>`;
+    $("#btnMuatRekap").onclick = renderRekap;
+  } catch (e) { el.innerHTML = `<div class="card">Gagal memuat data dari Supabase. Cek internet, lalu coba lagi.</div>`; }
+}
+
+async function renderProgres() {
+  let rows = muat("skor:" + state.siswa.kode) || [];
+  if (PAKAI_SUPABASE) {
+    try { rows = await sb("skor?kode=eq." + encodeURIComponent(state.siswa.kode) + "&order=waktu.desc"); } catch (e) {}
+  }
+  $("#progresList").innerHTML = rows.length
+    ? `<div class="card"><h3>Riwayat skor ${esc(state.siswa.kode)}</h3><div class="tbl-wrap"><table class="tbl"><tr><th>Waktu</th><th>Jenis</th><th>Skor</th></tr>
+        ${rows.map((r) => `<tr><td>${new Date(r.waktu).toLocaleString("id-ID", { dateStyle:"short", timeStyle:"short" })}</td><td>${esc(r.jenis)}</td><td><b>${r.skor}/${r.maks}</b></td></tr>`).join("")}</table></div>
+        <p class="info"><small>${PAKAI_SUPABASE ? "Skor tersimpan online (Supabase)." : "Skor tersimpan di perangkat ini."}</small></p></div>`
+    : `<div class="card">Belum ada skor. Coba kerjakan Latihan atau Tes Literasi dulu ya!</div>`;
+}
+
+/* ---- mulai ---- */
+state.siswa = muat("siswa");
+segarkanTombolMusik();
+</script>
